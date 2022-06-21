@@ -20,6 +20,14 @@
     @endsection
 
     @section('content')
+    @if (Auth::check())
+    <p>USER: {{$user->name . ' (' . $user->email . ')'}}</p>
+    @else
+    <p>※ログインしていません。
+    <a href="/login">ログイン</a> |
+    <a href="/register">登録</a>
+    </p>
+    @endif
         <table>
         <tr>
             <th>Name</th>
@@ -35,6 +43,7 @@
         @endforeach
         </table>
     @endsection
+
 
 
 
