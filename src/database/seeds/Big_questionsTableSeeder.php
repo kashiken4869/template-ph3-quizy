@@ -11,11 +11,14 @@ class Big_questionsTableSeeder extends Seeder
     {
             $param = [
             'name' => 'ガチで東京の人しか解けない！#東京の難読地名クイズ',
+            'sortID' => '1',
         ];
         DB::table('big_questions')->insert($param);
 
             $param = [
             'name' => 'ガチで広島の人しか解けない！#広島の難読地名クイズ',
+            'sortID' => '2',
+
         ];
         DB::table('big_questions')->insert($param);
     }

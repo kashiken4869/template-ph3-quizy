@@ -17,12 +17,44 @@ use App\Http\Middleware\HelloMiddleware;
 
 Route::get('quiz', 'QuizController@index_links');
 Route::get('quiz/{id?}', 'QuizController@index_questions');
+
+Route::get('admin/big_questions', 'BigQuestionsController@index_links');
+Route::get('admin/big_questions', 'BigQuestionsController@index_links')
+    ->middleware('auth');
+Route::post('admin/big_questions', 'BigQuestionsController@index_links');
+Route::get('admin/big_questions/add', 'BigQuestionsController@add_title');
+Route::post('admin/big_questions/add', 'BigQuestionsController@create_title');
+Route::get('admin/big_questions/edit/{id?}', 'BigQuestionsController@edit_title');
+Route::post('admin/big_questions/edit/{id?}', 'BigQuestionsController@update_title');
+Route::get('admin/big_questions/delete/{id?}', 'BigQuestionsController@delete_title');
+Route::post('admin/big_questions/delete/{id?}', 'BigQuestionsController@remove_title');
+
+Route::post('admin/small_questions/{id?}', 'SmallQuestionsController@index_questions');
+Route::get('admin/small_questions/{id?}', 'SmallQuestionsController@index_questions');
+Route::get('admin/small_questions/{id?}/add', 'SmallQuestionsController@add_question');
+Route::post('admin/small_questions/{id?}/add', 'SmallQuestionsController@create_question');
+Route::get('admin/small_questions/delete/{id?}', 'SmallQuestionsController@delete_question');
+Route::post('admin/small_questions/delete/{id?}', 'SmallQuestionsController@remove_question');
+
+Route::post('admin/choices/{id?}', 'ChoicesController@index_choices');
+Route::get('admin/choices/{id?}', 'ChoicesController@index_choices');
+
+Route::get('admin/choices/{id?}/add', 'ChoicesController@add_choice');
+Route::post('admin/choices/{id?}/add', 'ChoicesController@create_choice');
+
+Route::get('admin/choices/delete/{id?}', 'ChoicesController@delete_choice');
+Route::post('admin/choices/delete/{id?}', 'ChoicesController@remove_choice');
+
+Route::get('admin/choices/edit/{id?}', 'ChoicesController@edit_choice');
+Route::post('admin/choices/edit/{id?}', 'ChoicesController@update_choice');
+
+
+
+
 Route::get('hello', 'HelloController@index');
 Route::get('hello', 'HelloController@index')
     ->middleware('auth');
 Route::post('hello', 'HelloController@post'); 
-Route::get('quiz/1', 'QuizController@index1'); 
-Route::get('quiz/2', 'QuizController@index2'); 
 Route::get('hello/add', 'HelloController@add');
 Route::post('hello/add', 'HelloController@create');
 Route::get('hello/edit', 'HelloController@edit');

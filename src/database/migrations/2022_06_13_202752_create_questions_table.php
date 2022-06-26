@@ -11,7 +11,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('big_question_id');
+            $table->integer('hide')->default(0);
             $table->string('image');
+            $table->integer('sortID');
             $table->timestamps();
         });
     }
