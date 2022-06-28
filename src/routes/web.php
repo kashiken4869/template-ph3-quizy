@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\HelloMiddleware;
 
 Route::get('quiz', 'QuizController@index_links');
-Route::get('quiz/{id?}', 'QuizController@index_questions');
+Route::get('quiz/{id?}', 'QuizController@index_questions')->name('quiz.index.questions);
 // Route::get('hello', 'HelloController@index');
 // Route::post('hello', 'HelloController@post'); 
 // Route::get('quiz/1', 'QuizController@index1'); 
