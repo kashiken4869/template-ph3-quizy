@@ -13,8 +13,11 @@
 
 <body>
     <div>
-        <a href="quiz/1">ガチで東京の人しか解けない！ #東京の難読地名クイズ</a>
-        <a href="quiz/2">ガチで広島の人しか解けない！ #広島の難読地名クイズ</a>
+            @foreach ($links as $link)
+            <a href="quiz/{{$link->id}}">
+            {{$link->name}}
+            </a>
+            @endforeach
     </div>
 </body>
 
