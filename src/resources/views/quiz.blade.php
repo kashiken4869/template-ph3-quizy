@@ -13,7 +13,7 @@
         @foreach ($questions as $question)
             <h1 class="title">{{$loop->iteration}}．この地名は何て読む？</h1>
             <div class="quiz-img-container">
-                <img src="../../img/{{$question->image}}" alt="">
+                <img src="{{ asset(img/$question->image)}}" alt="">
             </div>
         <!-- 選択肢のループ -->
                     <ul id ="quiz-choices{{$question->id}}" class="choices-list">

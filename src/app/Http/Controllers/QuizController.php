@@ -41,7 +41,7 @@ class QuizController extends Controller
         // $choices = DB::table('choices')
         //     // ->where('question_id', $questions['id'])
         //     ->get();
-        return view('quiz', ['questions' => $questions, 'choices' => $choices, 'links' => $links]);    
+        return view('quiz', compact('questions', 'choices', 'links'));    
     }
 
 }
