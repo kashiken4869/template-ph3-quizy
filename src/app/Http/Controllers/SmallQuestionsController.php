@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\BigQuestion;
+use App\Question;
+use App\Choice;
+
+
+class SmallQuestionsController extends Controller
+{
+    // 設問関連
+    public function index_questions(Request $request, $id)
+    {
+        $big_question = BigQuestion::find($id);
+        $question = Question::find($id);
+
+        if (!empty($request->input('list-ids')))
+        {
+            $list = $request->input('list-ids');
+
+            $lists = explode(',', $list);
+
+            foreach($lists as $index => $sort_id){
+                $question = Question::where('id', $sort_id)->first();
+                $question->sortID = $index + 1;
+                $question->save();
+            }
+        } else { }
+
+        $questions = Question::where('big_question_id', $id)->where('hide', 0)->orderBy('sortID', 'asc')->get();
+
+        return view('admin.small_questions.list', ['big_question' => $big_question, 'questions' => $questions]);
+    }
+
+
+    public function add_question(Request $request)
+    {
+        return view('admin.small_questions.add');
+    }
+
+    public function create_question(Request $request, $id)
+    {
+
+        $this->validate($request, Question::$rules);
+
+        $big_question = BigQuestion::find($id);
+
+        if ($file = $request->image) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('img/');
+            $file->move($target_path, $fileName);
+        } else {
+            $fileName = "";
+        }
+
+        $question = new Question;
+        $question->big_question_id = $id;
+        $question->image = $fileName;
+        $question->hide = 0;
+        $question->sortID = Question::max('id') + 1;
+        $question->save();
+        return redirect('/admin/small_questions/'.$big_question->id);
+    }
+
+    public function delete_question($id)
+    {
+        $question = Question::find($id);
+        return view('admin.small_questions.delete', ['question' => $question]);
+    }
+
+    public function remove_question($id)
+    {
+        $question = Question::find($id);
+        $question->hide = 1;
+        $question->save();
+        return redirect('/admin/small_questions/'.$question->big_question_id);
+    }
+}
